@@ -1,0 +1,22 @@
+version: '3.5'
+services:
+  api:
+    build: .
+    ports:
+      - ${APP_PORT}:5000
+    volumes:
+      - .:/app
+    environment:
+      - APP_SETTINGS=${CONFIG}
+      - DATABASE_URL=${CONNECTION_STRING}
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=${DB}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
