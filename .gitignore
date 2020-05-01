@@ -25,3 +25,5 @@ htmlcov/
 
 #docker
 docker-compose.yml
+
+migrations/
