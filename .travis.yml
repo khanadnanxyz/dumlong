@@ -1,0 +1,19 @@
+services:
+  - docker
+
+script:
+  - echo $SHORT_SHA
+  - docker build .
+    -f ./devops/Dockerfile
+    -t khanadnanxyz/dumlong:latest
+
+after_script:
+  - docker images
+
+before_deploy:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+deploy:
+  provider: script
+  script: docker push khanadnanxyz/dumlong:latest
+  on:
+    branch: master
