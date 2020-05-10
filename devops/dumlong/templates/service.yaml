@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dumlong-svc
+  namespace: {{.Values.namespace}}
+spec:
+  ports:
+    - name: dumlong-svc-port
+      port: 80
+      targetPort: dumlong-port
+  selector:
+    app: {{.Values.deploy.app}}
+  type: {{.Values.service.type}}

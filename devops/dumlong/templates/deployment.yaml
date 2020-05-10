@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dumlong-deployment
+  namespace: {{.Values.namespace}}
+spec:
+  replicas: {{.Values.deploy.replicas}}
+  selector:
+    matchLabels:
+      app: {{.Values.deploy.app}}
+  template:
+    metadata:
+      labels:
+        project: {{.Values.project}}
+        app: {{.Values.deploy.app}}
+    spec:
+      containers:
+        - name: {{.Values.deploy.app}}
+          image: {{.Values.deploy.repo}}:{{.Values.deploy.imgTag}}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              name: dumlong-port
+              protocol: TCP
