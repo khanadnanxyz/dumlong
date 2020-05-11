@@ -12,7 +12,6 @@ app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 
 db = models.init_app(app)
-engine = models.create_tables(app)
 
 jwt = JWTManager(app)
 

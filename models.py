@@ -14,15 +14,9 @@ def init_app(app):
     return db
 
 
-def create_tables(app):
-    engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
-    db.metadata.create_all(engine)
-    return engine
-
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255), unique=True, nullable=False)
+    username = db.Column(db.String(9), unique=True, nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     name = db.Column(db.String(255), unique=False, nullable=True)
     password = db.Column(db.String(255), unique=False, nullable=False)
