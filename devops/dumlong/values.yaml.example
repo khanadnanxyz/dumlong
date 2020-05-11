@@ -1,0 +1,20 @@
+# Default values for dumlong.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+project: mountains #your project name
+namespace: kasalong #your namespace
+
+deploy:
+  app: dumlong-api #your app name
+  replicas: 2 #how many replicas you want to have
+  imgTag: latest #image tag name
+  repo: khanadnanxyz/dumlong #image name
+
+service:
+  type: ClusterIP #your service type
+
+ingress:
+  host: dumlong.svc.khanadnan.xyz #your domain or host name
+  secret: tls-dumlong-khanadnan-xyz #name your certificate for your cert-manager
+  paths: /

@@ -27,3 +27,5 @@ htmlcov/
 docker-compose.yml
 
 migrations/
+
+devops/dumlong/values.yaml
