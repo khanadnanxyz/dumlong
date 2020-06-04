@@ -1,6 +1,8 @@
 import os
 
 from flask import Flask, jsonify, request
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from passlib.hash import sha256_crypt
 from marshmallow import ValidationError
 
@@ -16,6 +18,12 @@ db = models.init_app(app)
 jwt = JWTManager(app)
 
 user_schema = models.UserSchema()
+
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["200 per day", "50 per hour"]
+)
 
 
 @app.route("/")
@@ -103,6 +111,7 @@ def add_register():
 
 
 @app.route('/api/users', methods=['GET'])
+@limiter.limit("10/hour")
 def get_users():
     data = []
     for row in User.query.all():
